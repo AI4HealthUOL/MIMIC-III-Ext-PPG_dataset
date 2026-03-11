@@ -25,6 +25,7 @@ def process_10s_window(sub_window, fs, file_name=None, segment_idx=None, plot_fl
         "median_abp": np.nan,
         "median_pleth": np.nan,
         "median_ecg": np.nan,
+        "mean_rpeak_deriv_pleth":np.nan,
     }
 
     if "ABP" in sub_window.columns:
@@ -50,18 +51,27 @@ def process_10s_window(sub_window, fs, file_name=None, segment_idx=None, plot_fl
         
         ppg_result= listen_sqi2(pleth, "PLETH", fs)
         results["pleth_sqi"] = ppg_result.get("sqi")
+        
+        # === Extract mean_peak_derivatives
+        
         mean_peak_derivatives_ppg=ppg_result.get("mean_peak_derivatives")
         #print("mean_peak_derivatives_ppg",mean_peak_derivatives_ppg)
         if isinstance(mean_peak_derivatives_ppg, (int, float)) and not np.isnan(mean_peak_derivatives_ppg):
             results["mean_peak_deriv_pleth"] = mean_peak_derivatives_ppg
+            
+        # === Extract mean_rpeak_derivatives_ppg (for ECG-style peaks in PPG)
+        mean_rpeak_derivatives_ppg = ppg_result.get("mean_rpeak_derivatives_ppg")
+        if isinstance(mean_rpeak_derivatives_ppg, (int, float)) and not np.isnan(mean_rpeak_derivatives_ppg):
+            results["mean_rpeak_deriv_pleth"] = mean_rpeak_derivatives_ppg
             
         
         if results["pleth_sqi"] > -1:
             results["median_pleth"] = np.median(pleth)
             if plot_flag:
                 peaks = ppg_result.get("peaks")
+                rpeaks = ppg_result.get("rpeak_ppg")  # ECG-style peaks from PPG
                 ppg_clean = ppg_result.get("ppg_filtered")
-                plot_ppg_only(ppg_clean, fs, peaks, title=f"PPG: {file_name}_segment{segment_idx}")
+                plot_ppg_only(ppg_clean, fs, peaks, rpeaks=rpeaks, title=f"PPG: {file_name}_segment{segment_idx}")
         
         
     if "II" in sub_window.columns:
@@ -91,7 +101,7 @@ def process_30s_window(signal_df, fs, file_name=None, plot_flag=False):
         "vector_10s_iqr_sbp": [], "vector_10s_iqr_dbp": [],
         "vector_10s_pleth_sqi": [], "vector_10s_abp_sqi": [],
         "vector_10s_ecg_sqi": [], "vector_10s_hr": [],
-        "vector_10s_mean_peak_deriv_pleth": [],  "vector_10s_mean_peak_deriv_ecg": [],
+        "vector_10s_mean_peak_deriv_pleth": [],  "vector_10s_mean_peak_deriv_ecg": [], "vector_10s_mean_rpeak_deriv_pleth": [],
         "vector_10s_median_abp": [],
         "vector_10s_median_pleth": [],
         "vector_10s_median_ecg": []
@@ -139,7 +149,11 @@ def process_30s_window(signal_df, fs, file_name=None, plot_flag=False):
 def process_chunk_of_30s_segments(meta_data_path, fs, start_index, end_index, plot_flag=False, wfdb_folder="WFDB_folder", save_ppg_segments=False, ppg_output_folder="PPG_segments"):
     results = []
     df_meta = pd.read_pickle(meta_data_path)
-    df_chunk = df_meta.iloc[start_index:end_index].copy()
+    #df_chunk = df_meta.iloc[start_index:end_index].copy()
+    if end_index is None:
+        df_chunk = df_meta.iloc[start_index:].copy()
+    else:
+        df_chunk = df_meta.iloc[start_index:end_index].copy()
 
     for _, row in tqdm(df_chunk.iterrows(), total=len(df_chunk), desc="Processing Segments"):
         file_name = row["signal_file_name"]
@@ -171,18 +185,4 @@ def process_chunk_of_30s_segments(meta_data_path, fs, start_index, end_index, pl
          
     return pd.DataFrame(results)
 
-if __name__ == "__main__":
-    meta_data_path = "final_pkl_files_new_4/final_memmap_files/merged_WFDB_with_metadata_4.pkl"
-    fs = 125
-    # we have around 7000000 cases
-    start_index = 0
-    end_index = 500000
-    plot_flag = False
-    wfdb_folder = "WFDB_files_with_utils_5_15min_30s_segmented_no_Flat_PPG_new_4"
-    save_ppg_segments = True
-    ppg_output_folder = "npy_PPG_segments_30s_15min_no_Flat_interpolated_NaN_new_4"
 
-    results_df = process_chunk_of_30s_segments(meta_data_path, fs, start_index, end_index, plot_flag, wfdb_folder, save_ppg_segments, ppg_output_folder)
-    results_df = round_all_numeric(results_df, decimals=2)
-    results_df.to_pickle(f"df_{start_index}_{end_index}_4.pkl")
-    print(f"✅ Saved results for rows {start_index} to {end_index}.")
