@@ -95,34 +95,11 @@ def listen_sqi2(window_signals, signal_type, fs):
             
             ecg_filtered = nk.ecg_clean(window_signals, sampling_rate=fs, method="neurokit")
 
-            
-            
-            
             rpeaks = nk.ecg_findpeaks(ecg_filtered, sampling_rate=fs)["ECG_R_Peaks"]
-            
-    
-            
+                    
             if len(rpeaks) < 2 or np.any(np.isnan(rpeaks)):
                 return {"signal_type": signal_type, "sqi": -17}
-
-
-            
-            
-            deriv_stats_ecg = compute_derivative_stats(ecg_filtered, fs)
-            ecg_derivative = deriv_stats_ecg["derivative"]
-            rpeak_derivatives = ecg_derivative[rpeaks]
-            
-            #print("Derivative Stats_ECG:")
-            #print("  Mean: ", deriv_stats_ecg["mean_derivative"])
-            #print("  Std:  ", deriv_stats_ecg["std_derivative"])
-            #print("  Max:  ", deriv_stats_ecg["max_derivative"])
-            #print("Derivative at ECG R-peaks:")
-            #print("  Mean: ", np.mean(rpeak_derivatives))
-            #print("  Std:  ", np.std(rpeak_derivatives))
-            #print("  Max: ", np.max(rpeak_derivatives))
-            #print("  Values:", rpeak_derivatives[:5])
-            
-            
+ 
             #plt.figure(figsize=(6, 4))
             #plt.hist(deriv_stats_ecg["derivative"], bins=50, color='blue', alpha=0.7)
             #plt.title("ECG First Derivative Histogram")
@@ -141,7 +118,6 @@ def listen_sqi2(window_signals, signal_type, fs):
                 "correlations": corrs,
                 "rpeaks": rpeaks,
                 "ecg_filtered":ecg_filtered,
-                "mean_rpeak_derivatives":np.mean(rpeak_derivatives)
                 
             }
 
@@ -151,47 +127,14 @@ def listen_sqi2(window_signals, signal_type, fs):
             #print("window_signals",window_signals)
            
             ppg_filtered = nk.ppg_clean(window_signals, sampling_rate=fs, method="elgendi")
-            
-            
-
-            
-            # just for finding the mislabeled signals
-            ppg_filtered_ecg_rule= nk.ecg_clean(window_signals, sampling_rate=fs, method="neurokit")
-
-            
-          
             #print("ppg_filtered",ppg_filtered)
             try:
                 peaks = nk.ppg_findpeaks(ppg_filtered, sampling_rate=fs)["PPG_Peaks"]
-                # just for finding the mislabeled signals
-                rpeak_ppg= nk.ecg_findpeaks(ppg_filtered_ecg_rule, sampling_rate=fs)["ECG_R_Peaks"]
-                
                 if peaks.size < 2 or np.any(np.isnan(peaks)):
                     raise ValueError("Invalid or insufficient peaks")
             except Exception:
                 return {"signal_type": signal_type, "sqi": -18}
                 
-            
-            deriv_stats_ppg = compute_derivative_stats(ppg_filtered, fs)
-            ppg_derivative = deriv_stats_ppg["derivative"]
-            peak_derivatives = ppg_derivative[peaks]
-            # just for finding the mislabeled signals
-            if len(rpeak_ppg) < 2 or np.any(np.isnan(rpeak_ppg)):
-                rpeak_derivatives_ppg = np.array([])
-            else:
-                rpeak_derivatives_ppg = ppg_derivative[rpeak_ppg]
-
-            
-            #print("Derivative Stats_PPG:")
-            #print("  Mean: ", deriv_stats_ppg["mean_derivative"])
-            #print("  Std:  ", deriv_stats_ppg["std_derivative"])
-            #print("  Max:  ", deriv_stats_ppg["max_derivative"])
-            #print("Derivative at PPG Peaks:")
-            #print("  Mean: ", np.mean(peak_derivatives))
-            #print("  Std:  ", np.std(peak_derivatives))
-            #print("  Max: ", np.max(peak_derivatives))
-            #print("  Values:", peak_derivatives[:5])
-            
             #plt.figure(figsize=(6, 4))
             #plt.hist(deriv_stats_ppg["derivative"], bins=50, color='green', alpha=0.7)
             #plt.title("PPG First Derivative Histogram")
@@ -210,9 +153,6 @@ def listen_sqi2(window_signals, signal_type, fs):
                 "correlations": corrs,
                 "ppg_filtered": ppg_filtered,
                 "peaks": peaks,
-                "rpeak_ppg": rpeak_ppg,
-                "mean_peak_derivatives": np.mean(peak_derivatives),
-                "mean_rpeak_derivatives_ppg": np.mean(rpeak_derivatives_ppg) if rpeak_derivatives_ppg.size > 0 else np.nan
             }
 
 
