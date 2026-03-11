@@ -1,8 +1,6 @@
 # resp_utils.py
 
 
-
-
 """
 =======================================================================================
 RESPIRATORY SIGNAL QUALITY INDEX AND BREATHING RATE ESTIMATION MODULE
