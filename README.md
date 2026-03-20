@@ -28,6 +28,8 @@ The dataset is derived from the **MIMIC-III Waveform Database Matched Subset** a
 - 🩸 **Arterial Blood Pressure (ABP)**
 - 🌬 **Respiratory signals (RESP)**
 
+![MIMIC-III-Ext-PPG Dataset](images/d_dataset.png)
+
 📑 Each segment is associated with:
 
 - 🫀 heart rhythm annotations  
