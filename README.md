@@ -51,27 +51,18 @@ The dataset enables research in:
 
 ---
 
-# 🗂 Dataset Versions
+##  v1.1.0 — Current Public Release
 
-## 🟢 v1.0.0 — Current Public Release
+Available on **PhysioNet** (https://doi.org/10.13026/r6k1-xt76)
 
-Available on **PhysioNet**.
-
-📊 Approximate dataset statistics:
 
 | Property | Value |
 |------|------|
-| 👥 Subjects | ~6,131 |
-| 📦 Segments (30 s) | ~4.9 million |
+| 👥 Subjects | ~6,189 |
+| 📦 Segments (30 s) | ~6.3 million |
 | 📡 Signals | PPG, ECG, ABP, RESP |
 | 📑 Metadata | demographics, rhythm labels, physiological measurements |
-
 ---
-
-## 🟡 v1.1.0 — Upcoming Release
-
-Version **v1.1.0** has been uploaded to PhysioNet and is currently **under review**.
-
 
 MIMIC-III-Ext-PPG  
 │  
@@ -84,11 +75,6 @@ MIMIC-III-Ext-PPG
 │   │   ├── 📦 Segment (30 seconds)  
 
 
----
-
-## 💻 MIMIC-III-Ext-PPG Code Repository
-
-For the **source code used in the dataset processing, benchmarking, and analysis**, please visit the dedicated code repository:
 
 ➡️ **MIMIC-III-Ext-PPG Code Repository**
 
@@ -101,19 +87,19 @@ Source code and pipelines are available in the **`Source_codes`** directory:
 
 If you use this dataset, please cite:
 
-Moulaeifard M, Charlton P H, Strodthoff N. MIMIC-III-Ext-PPG: A PPG Benchmark Dataset for Cardiorespiratory Analysis (version 1.0.0). PhysioNet. 2026. RRID:SCR_007345. Available from: https://doi.org/10.13026/nmwb-6h34
+Moulaeifard, M., Charlton, P. H., & Strodthoff, N. (2026). MIMIC-III-Ext-PPG: A PPG Benchmark Dataset for Cardiorespiratory Analysis (version 1.1.0). PhysioNet. RRID:SCR_007345. https://doi.org/10.13026/r6k1-xt76
 
 or BibTeX:
 
-@article{PhysioNet-mimic-iii-ext-ppg-1.0.0,
+@article{PhysioNet-mimic-iii-ext-ppg-1.1.0,
   author = {Moulaeifard, Mohammad and Charlton, Peter H and Strodthoff, Nils},
   title = {{MIMIC-III-Ext-PPG: A  PPG Benchmark Dataset for Cardiorespiratory Analysis}},
   journal = {{PhysioNet}},
   year = {2026},
-  month = feb,
-  note = {Version 1.0.0},
-  doi = {10.13026/nmwb-6h34},
-  url = {https://doi.org/10.13026/nmwb-6h34}
+  month = mar,
+  note = {Version 1.1.0},
+  doi = {10.13026/r6k1-xt76},
+  url = {https://doi.org/10.13026/r6k1-xt76}
 }
 
 ---
