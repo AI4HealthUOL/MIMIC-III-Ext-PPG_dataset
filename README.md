@@ -30,6 +30,8 @@ The dataset is derived from the **MIMIC-III Waveform Database Matched Subset** a
 
 ![MIMIC-III-Ext-PPG Dataset](images/d_dataset.png)
 
+![MIMIC-III-Ext-PPG Dis](images/d_disturbutions.png)
+
 📑 Each segment is associated with:
 
 - 🫀 heart rhythm annotations  
