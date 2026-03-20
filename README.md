@@ -23,10 +23,7 @@ The dataset is derived from the **MIMIC-III Waveform Database Matched Subset** a
 
 🧬 **Signals included**
 
-- 🫀 **PPG (PLETH)**
-- 💓 **ECG**
-- 🩸 **Arterial Blood Pressure (ABP)**
-- 🌬 **Respiratory signals (RESP)**
+- 🫀 **PPG (PLETH)** 💓 **ECG** 🩸 **Arterial Blood Pressure (ABP)** 🌬 **Respiratory signals (RESP)**
 
 ![MIMIC-III-Ext-PPG Dataset](images/d_dataset.png)
 
