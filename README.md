@@ -113,8 +113,3 @@ or BibTeX:
 - 💻 [**Nils Strodthoff**](https://github.com/nstrodt)
 
 
-## 📜 License
-
-### Code
-The source code in this repository is released under the **MIT License**.
-
