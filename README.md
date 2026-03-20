@@ -104,11 +104,6 @@ or BibTeX:
 
 ---
 
-# 💬 Contact
-
-For questions, suggestions, or collaboration inquiries:
-
-👉 Please send an email to mohammad.moulaeifard@uol.de
 
 
 ## 👥 Contributors
