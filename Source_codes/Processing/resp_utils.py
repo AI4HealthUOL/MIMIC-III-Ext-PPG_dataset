@@ -5,7 +5,7 @@
 =======================================================================================
 RESPIRATORY SIGNAL QUALITY INDEX AND BREATHING RATE ESTIMATION MODULE
 
-Inspired by:
+based on:
 Charlton, P. H., et al. (2021). "An impedance pneumography signal quality index..."
 https://doi.org/10.1088/1361-6579/ac3b8c
 
