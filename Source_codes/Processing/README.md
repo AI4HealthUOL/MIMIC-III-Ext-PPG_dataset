@@ -1,7 +1,7 @@
 
 # 🧠 Physiological Signal Quality Assessment & Feature Extraction
 
-The following repository is a modular and extensible Python pipeline for processing and analyzing physiological signals, including ABP, ECG, PPG, and RESP. This toolkit is part of our **MIMIC-III-EXt-PPG** project. It incorporates advanced preprocessing, signal quality assessment, and feature extraction — with NeuroKit2 integrated for peak detection and signal cleaning where applicable.
+The following repository is a modular and extensible Python pipeline for processing and analyzing physiological signals, including ABP, ECG, PPG, and RESP. This toolkit is part of our **MIMIC-III-EXt-PPG** project. It incorporates advanced preprocessing, signal quality assessment, and feature extraction with NeuroKit2 integrated for peak detection and signal cleaning where applicable.
 
 ---
 
