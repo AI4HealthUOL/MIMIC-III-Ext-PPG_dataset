@@ -2,7 +2,7 @@
 # 🫀 MIMIC-III-Ext-PPG
 
 
-**MIMIC-III-Ext-PPG** is a large-scale dataset for **cardiorespiratory signal analysis** derived from the MIMIC-III Waveform Database. This repository serves as the **official hub for documentation, and code resources** related to the dataset.
+**MIMIC-III-Ext-PPG** is a large-scale dataset for **cardiorespiratory signal analysis** derived from the MIMIC-III Waveform Database. This repository serves as the **official hub for documentation and code resources** related to the dataset.
 
 ---
 
@@ -12,6 +12,10 @@
 
 https://physionet.org/content/mimic-iii-ext-ppg/1.1.0/
 
+##  Benchmarking paper
+
+[https://arxiv.org/abs/2603.21832
+](https://arxiv.org/abs/2603.21832)
 ---
 
 
